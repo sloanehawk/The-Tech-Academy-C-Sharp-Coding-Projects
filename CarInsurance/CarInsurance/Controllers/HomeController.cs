@@ -98,7 +98,7 @@ namespace CarInsurance.Controllers
                 db.Quotes.Add(quote);
                 db.SaveChanges();
             }
-            return View("Success");
+            return View("Index");
         }
 
 

@@ -24,6 +24,7 @@ namespace CarInsurance.Controllers
                     quoteVm.FirstName = quote.FirstName;
                     quoteVm.LastName = quote.LastName;
                     quoteVm.EmailAddress = quote.EmailAddress;
+                    quoteVm.QuoteAmount = quote.QuoteAmount;
                     quoteVms.Add(quoteVm);
                 }
                 return View(quoteVms);
