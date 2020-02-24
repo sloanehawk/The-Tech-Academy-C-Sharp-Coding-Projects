@@ -1,40 +1,42 @@
 ﻿<!-- ko with: home -->
 
-<h1>Shopping List (<span data-bind="text: items().length"></span>)</h1>
-<ul data-bind="template: {name: 'itemsTemplate', foreach:items}"></ul>
 
-<script id="itemsTemplate" type="text/html">
-        
-    <li>
-        <label for="quantity">Quantity</label>
-        <select id="quantity" data-bind="options: itemQuantities"></select>
-        <input data-bind="value: name" />  <!--, style: {textDecoration: isInCart? line-through}-->
-        <button data-bind="click: remove">Remove</button>
+<div id="main">
 
-        <label><input type="checkbox" data-bind="checked: isInCart" />In My Cart</label>
-    </li>
-</script>
-<button data-bind="click: addItem">Add item</button>
+    <h1>Shopping List (<span data-bind="text: items().length"></span>)</h1>
+    <ul data-bind="template: {name: 'itemsTemplate', foreach: items }"></ul>
 
-<script type="text/javascript">
-    var viewModel = {
-        //Quantity options
-        itemQuantities: ko.observableArray(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
-        items: ko.observableArray([new item("eggs"), new item("butter")]),
-        addItem: function () {
-            this.items.push(new item("another"));
-        }
-    };
-    function item(name) {
-        return {
-            name: ko.observable(name),
-            isInCart: ko.observable(false),
-            remove: function () {
-                viewModel.items.remove(this);
+
+    <script id="itemsTemplate" type="text/html">
+
+        <li>
+            
+            <input data-bind="value: name" />
+            <button data-bind="click: remove">Remove</button>
+
+            <label><input type="checkbox" data-bind="checked: isInCart" />In My Cart</label>
+        </li>
+    </script>
+    <button data-bind="click: addItem">Add item</button>
+
+
+    <script type="text/javascript">
+        var viewModel = {
+            items: ko.observableArray([new item("eggs"), new item("butter")]),
+            addItem: function () {
+                this.items.push(new item("another"));
             }
         };
-    }
-    ko.applyBindings(viewModel);
-</script>
-
+        function item(name) {
+            return {
+                name: ko.observable(name),
+                isInCart: ko.observable(false),
+                remove: function () {
+                    viewModel.items.remove(this);
+                }
+            };
+        }
+        ko.applyBindings(viewModel, document.getElementById('main'));
+    </script>
+</div>
 <!-- /ko -->
